@@ -1,4 +1,6 @@
 <?php
+// Tambahkan koneksi database di awal file
+include 'koneksi.php';
 // Mulai session
 session_start();
 
@@ -75,7 +77,13 @@ $username = $_SESSION['username'];
             <!-- small box -->
             <div class="small-box bg-success">
               <div class="inner">
-                <sup style="font-size: 20px"></sup>
+                <?php
+                // Query untuk menghitung jumlah produk
+                $sql = "SELECT COUNT(*) as total_products FROM produk";
+                $result = $koneksi->query($sql);
+                $row = $result->fetch_assoc();
+                ?>
+                <h3><?php echo $row['total_products']; ?></h3>
                 <p>Manage Product</p>
               </div>
               <div class="icon">
