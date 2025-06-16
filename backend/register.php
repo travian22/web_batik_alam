@@ -22,10 +22,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if ($result_check->num_rows > 0) {
             $error_message = "Username sudah digunakan.";
         } else {
-            // Menyimpan data pengguna ke database
+            // Menyimpan data pengguna ke database tanpa hashing
             $sql_insert = "INSERT INTO users (username, password) VALUES (?, ?)";
             $stmt_insert = $koneksi->prepare($sql_insert);
-            $stmt_insert->bind_param("ss", $username, $hashed_password);
+            $stmt_insert->bind_param("ss", $username, $password);
             
             if ($stmt_insert->execute()) {
                 // Redirect ke halaman login
